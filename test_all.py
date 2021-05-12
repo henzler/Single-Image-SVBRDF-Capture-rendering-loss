@@ -15,7 +15,9 @@ with open(str(Path(dataset_dir, 'metadata.json')), 'r') as f:
 
         material_id = material['material_id']
 
-        if material['split'] != 'test':
+        if material['split'] != 'test' and not material_id == '1847' \
+                and not material_id == '1848' and not material_id == '1886' \
+                and not material_id == '1906':
             continue
 
         idx = material['material_id']
@@ -23,7 +25,7 @@ with open(str(Path(dataset_dir, 'metadata.json')), 'r') as f:
         entry = material['entries'][0]
         filename = '{}{}'.format(entry['name'], entry['suffix'])
 
-        input_dir = str(Path(dataset_dir, 'test', idx, filename))
+        input_dir = str(Path(dataset_dir, material['split'], idx, filename))
         output_dir = Path(output_path, idx)
 
         if output_dir.is_dir():
